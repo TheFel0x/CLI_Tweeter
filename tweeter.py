@@ -30,6 +30,11 @@ re      --Reply.
 [ID:] ID of the Tweet that you want to reply to.
 [>] enter your reply.
 
+sre      --More stable reply.
+[ID:] ID of the Tweet that you want to reply to.
+[ats:] all mentioned @'s
+[>] enter your reply.
+
 crt     --Comment-Retweet.
 [URL:] URL of the Tweet that you want to comment retweet.
 [>] enter your comment.
@@ -61,6 +66,12 @@ h       --Help.""")
         id = input("ID:")
         tweet = input(">")
         api.update_status(tweet, in_reply_to_status_id = id)
+
+    elif cmd == "sre":   #reply
+        id = input("ID:")
+        ats = input("ats:")
+        tweet = input(">")
+        api.update_status(ats + " " + tweet, id)
     
     elif cmd == "crt":  #comment-RT
         url = input("URL:")
