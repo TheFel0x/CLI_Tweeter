@@ -2,21 +2,71 @@ import tweepy
 import webbrowser
 import time
 import api_stuff
+import os.path
+from os import path
+import sys
 
-# login ----------------------------------------------------------------------------
-consumer_key = api_stuff.consumer_key
-consumer_secret = api_stuff.consumer_secret
-callback_uri = 'oob'
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_uri)
-redirect_url = auth.get_authorization_url()
-print(redirect_url)
-webbrowser.open(redirect_url)
-user_pin_input = input("pin:")
-auth.get_access_token(user_pin_input)
-api = tweepy.API(auth)
-me = api.me()
-print("Welcome " + me.screen_name + "!")
-# login done -----------------------------------------------------------------------
+def check_auth():
+    if path.exists(os.path.join(os.path.dirname(__file__), 'auth.txt')):
+        f = open(os.path.join(os.path.dirname(__file__), 'auth.txt'), "r")
+        auth_lines = f.readlines()
+        f.close()
+        login(auth_lines)
+    else:
+        auth_lines = []
+        register(auth_lines)
+        
+def register(auth_lines):
+    consumer_key = api_stuff.consumer_key
+    consumer_secret = api_stuff.consumer_secret
+    callback_uri = 'oob'
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_uri)
+    redirect_url = auth.get_authorization_url()
+    print(redirect_url)
+    webbrowser.open(redirect_url)
+    user_pin_input = input("pin:")
+    auth.get_access_token(user_pin_input)
+    api = tweepy.API(auth)
+    me = api.me()
+    print("Welcome " + me.screen_name + "!")
+    # save user
+    f = open(os.path.join(os.path.dirname(__file__), 'auth.txt'), "a")
+    if len(auth_lines) > 0:
+        f.write("\n" + me.screen_name + " " + auth.access_token + " " + auth.access_token_secret)
+    else:
+        f.write(me.screen_name + " " + auth.access_token + " " + auth.access_token_secret)
+
+def login(auth_lines):
+    print("Who do you want to login as?")
+    option = 0
+    for line in auth_lines:
+        print(str(option) + " - " + line.split()[0])
+        option += 1
+    print(str(option) + " - " + "New User\n")
+    choice = input("nmbr(/q):")
+    try:
+        choice = int(choice)
+    except ValueError:
+        print("canceled.")
+        sys.exit()
+    if choice > len(auth_lines)-1:
+        register(auth_lines)
+    else:
+        line = auth_lines[choice]
+        print("Logging in as " + line.split()[0] + "...")
+        access_token = line.split()[1]
+        access_token_secret = line.split()[2]
+
+        consumer_key = api_stuff.consumer_key
+        consumer_secret = api_stuff.consumer_secret
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+        api = tweepy.API(auth)
+        me = api.me()
+        print("Welcome " + me.screen_name + "!")
+
+
+check_auth()
 
 while True:
     print("(h for help)")
