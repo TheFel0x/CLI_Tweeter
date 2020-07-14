@@ -5,8 +5,10 @@ Using [Tweepy](https://github.com/tweepy/tweepy).
 
 # Installation
 
-None.
-Just download both files.
+ - Download both files
+ - Install Tweepy
+`pip install tweepy`
+(Assuming you have Python and pip already installed.)
 
 # How to use
 
