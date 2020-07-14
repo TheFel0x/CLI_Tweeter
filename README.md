@@ -2,7 +2,7 @@
 
 # CLI_Tweeter
 
-Using [Tweepy](https://github.com/tweepy/tweepy).
+Using [Tweepy](https://github.com/tweepy/tweepy). [![CodeFactor](https://www.codefactor.io/repository/github/thefel0x/cli_tweeter/badge/master)](https://www.codefactor.io/repository/github/thefel0x/cli_tweeter/overview/master)
 
 ## Installation
 
