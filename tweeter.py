@@ -35,6 +35,7 @@ def register(auth_lines):
         f.write("\n" + me.screen_name + " " + auth.access_token + " " + auth.access_token_secret)
     else:
         f.write(me.screen_name + " " + auth.access_token + " " + auth.access_token_secret)
+    tweeter(api)
 
 def login(auth_lines):
     print("Who do you want to login as?")
@@ -64,15 +65,14 @@ def login(auth_lines):
         api = tweepy.API(auth)
         me = api.me()
         print("Welcome " + me.screen_name + "!")
+        tweeter(api)
 
-
-check_auth()
-
-while True:
-    print("(h for help)")
-    cmd = input()
-    if cmd == "h":      #help
-        print("""
+def tweeter(api):
+    while True:
+        print("(h for help)")
+        cmd = input()
+        if cmd == "h":      #help
+            print("""
 tw      --Tweet.
 [>] enter your Tweet.
 
@@ -110,92 +110,95 @@ q       --Quit.
 
 h       --Help.""")
     
-    elif cmd == "tw":   #tweet
-        tweet = input(">")
+        elif cmd == "tw":   #tweet
+            tweet = input(">")
+            api.update_status(tweet)
     
-    elif cmd == "re":   #reply
-        id = input("ID:")
-        tweet = input(">")
-        api.update_status(tweet, in_reply_to_status_id = id)
+        elif cmd == "re":   #reply
+            id = input("ID:")
+            tweet = input(">")
+            api.update_status(tweet, in_reply_to_status_id = id)
 
-    elif cmd == "sre":   #reply
-        id = input("ID:")
-        ats = input("ats:")
-        tweet = input(">")
-        api.update_status(ats + " " + tweet, id)
+        elif cmd == "sre":   #reply
+            id = input("ID:")
+            ats = input("ats:")
+            tweet = input(">")
+            api.update_status(ats + " " + tweet, id)
     
-    elif cmd == "crt":  #comment-RT
-        url = input("URL:")
-        tweet = input(">")
-        api.update_status(tweet + " " + url)
+        elif cmd == "crt":  #comment-RT
+            url = input("URL:")
+            tweet = input(">")
+            api.update_status(tweet + " " + url)
     
-    elif cmd == "itw":  #image+tweet
-        count = int(input("count:"))
-        if count > 3:
-            img_obj1 = api.media_upload(input("path:"))
-        if count > 2:
-            img_obj2 = api.media_upload(input("path:"))
-        if count > 1:
-            img_obj3 = api.media_upload(input("path:"))
-        if count > 0:
-            img_obj4 = api.media_upload(input("path:"))
+        elif cmd == "itw":  #image+tweet
+            count = int(input("count:"))
+            if count > 3:
+                img_obj1 = api.media_upload(input("path:"))
+            if count > 2:
+                img_obj2 = api.media_upload(input("path:"))
+            if count > 1:
+                img_obj3 = api.media_upload(input("path:"))
+            if count > 0:
+                img_obj4 = api.media_upload(input("path:"))
 
-        tweet = input(">")
+            tweet = input(">")
         
-        if count >= 4:
-            api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
-        if count == 3:
-            api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
-        if count == 2:
-            api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string])
-        if count == 1:
-            api.update_status(tweet, media_ids=[img_obj4.media_id_string])
+            if count >= 4:
+                api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
+            if count == 3:
+                api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
+            if count == 2:
+                api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string])
+            if count == 1:
+                api.update_status(tweet, media_ids=[img_obj4.media_id_string])
     
-    elif cmd == "ire":  #image+reply
-        id = input("ID:")
-        count = int(input("count:"))
-        if count > 3:
-            img_obj1 = api.media_upload(input("path:"))
-        if count > 2:
-            img_obj2 = api.media_upload(input("path:"))
-        if count > 1:
-            img_obj3 = api.media_upload(input("path:"))
-        if count > 0:
-            img_obj4 = api.media_upload(input("path:"))
+        elif cmd == "ire":  #image+reply
+            id = input("ID:")
+            count = int(input("count:"))
+            if count > 3:
+                img_obj1 = api.media_upload(input("path:"))
+            if count > 2:
+                img_obj2 = api.media_upload(input("path:"))
+            if count > 1:
+                img_obj3 = api.media_upload(input("path:"))
+            if count > 0:
+                img_obj4 = api.media_upload(input("path:"))
 
-        tweet = input(">")
+            tweet = input(">")
         
-        if count >= 4:
-            api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
-        if count == 3:
-            api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
-        if count == 2:
-            api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
-        if count == 1:
-            api.update_status(tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = id)
+            if count >= 4:
+                api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+            if count == 3:
+                api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+            if count == 2:
+                api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+            if count == 1:
+                api.update_status(tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = id)
     
-    elif cmd == "icrt": #image+comment-RT
-        url = input("URL:")
-        count = int(input("count:"))
-        if count > 3:
-            img_obj1 = api.media_upload(input("path:"))
-        if count > 2:
-            img_obj2 = api.media_upload(input("path:"))
-        if count > 1:
-            img_obj3 = api.media_upload(input("path:"))
-        if count > 0:
-            img_obj4 = api.media_upload(input("path:"))
+        elif cmd == "icrt": #image+comment-RT
+            url = input("URL:")
+            count = int(input("count:"))
+            if count > 3:
+                img_obj1 = api.media_upload(input("path:"))
+            if count > 2:
+                img_obj2 = api.media_upload(input("path:"))
+            if count > 1:
+                img_obj3 = api.media_upload(input("path:"))
+            if count > 0:
+                img_obj4 = api.media_upload(input("path:"))
 
-        tweet = input(">")
+            tweet = input(">")
         
-        if count >= 4:
-            api.update_status(tweet + url, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
-        if count == 3:
-            api.update_status(tweet + url, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
-        if count == 2:
-            api.update_status(tweet + url, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string])
-        if count == 1:
-            api.update_status(tweet + url, media_ids=[img_obj4.media_id_string])
+            if count >= 4:
+                api.update_status(tweet + url, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
+            if count == 3:
+                api.update_status(tweet + url, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string])
+            if count == 2:
+                api.update_status(tweet + url, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string])
+            if count == 1:
+                api.update_status(tweet + url, media_ids=[img_obj4.media_id_string])
     
-    elif cmd == "q":    #quit
-        break
+        elif cmd == "q":    #quit
+            break
+
+check_auth()
