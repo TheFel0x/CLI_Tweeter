@@ -30,7 +30,8 @@ Using [Tweepy](https://github.com/tweepy/tweepy).
 | itw | Tweet with image |
 | re | Reply (don't use this) |
 | sre | Stable Reply |
-| ire | Reply with image |
+| ire | Reply with image (don't use this) |
+| isre | Stable reply with image |
 | crt | Comment Retweet |
 | icrt | Comment Retweet with image |
 
