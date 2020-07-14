@@ -45,6 +45,7 @@ itw     --Image-Tweet
 [>] enter your Tweet.
 
 ire     --Image-Reply
+[ID:] ID of the Tweet that you want to reply to.
 [count:] how many images you want to attach. (1-4)
 [path:] path of your image. The images will be in the order in which you add them.
 [>] enter your reply.
