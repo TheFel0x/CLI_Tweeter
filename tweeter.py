@@ -122,15 +122,15 @@ h       --Help.""")
             api.update_status(tweet)
     
         elif cmd == "re":   #reply
-            id = input("ID:")
+            tw_id = input("ID:")
             tweet = input(">")
-            api.update_status(tweet, in_reply_to_status_id = id)
+            api.update_status(tweet, in_reply_to_status_id = tw_id)
 
         elif cmd == "sre":   #reply
-            id = input("ID:")
+            tw_id = input("ID:")
             ats = input("ats:")
             tweet = input(">")
-            api.update_status(ats + " " + tweet, in_reply_to_status_id = id)
+            api.update_status(ats + " " + tweet, in_reply_to_status_id = tw_id)
     
         elif cmd == "crt":  #comment-RT
             url = input("URL:")
@@ -160,7 +160,7 @@ h       --Help.""")
                 api.update_status(tweet, media_ids=[img_obj4.media_id_string])
     
         elif cmd == "ire":  #image+reply
-            id = input("ID:")
+            tw_id = input("ID:")
             count = int(input("count:"))
             if count > 3:
                 img_obj1 = api.media_upload(input("path:"))
@@ -174,16 +174,16 @@ h       --Help.""")
             tweet = input(">")
         
             if count >= 4:
-                api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
             if count == 3:
-                api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
             if count == 2:
-                api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
             if count == 1:
-                api.update_status(tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = tw_id)
             
         elif cmd == "isre":  #image+stable reply
-            id = input("ID:")
+            tw_id = input("ID:")
             ats = input("ats:")
             count = int(input("count:"))
             if count > 3:
@@ -198,13 +198,13 @@ h       --Help.""")
             tweet = input(">")
         
             if count >= 4:
-                api.update_status(ats + " " + tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(ats + " " + tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
             if count == 3:
-                api.update_status(ats + " " + tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(ats + " " + tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
             if count == 2:
-                api.update_status(ats + " " + tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(ats + " " + tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
             if count == 1:
-                api.update_status(ats + " " + tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = id)
+                api.update_status(ats + " " + tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = tw_id)
     
         elif cmd == "icrt": #image+comment-RT
             url = input("URL:")
