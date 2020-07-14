@@ -26,11 +26,11 @@ while True:
 tw      --Tweet.
 [>] enter your Tweet.
 
-re      --Reply.
+re      --Reply. (don't use this.)
 [ID:] ID of the Tweet that you want to reply to.
 [>] enter your reply.
 
-sre      --More stable reply.
+sre      --More stable reply. (use this instead.)
 [ID:] ID of the Tweet that you want to reply to.
 [ats:] all mentioned @'s
 [>] enter your reply.
