@@ -1,8 +1,15 @@
+
 [![CodeFactor](https://www.codefactor.io/repository/github/thefel0x/cli_tweeter/badge/master)](https://www.codefactor.io/repository/github/thefel0x/cli_tweeter/overview/master)
 
 # CLI_Tweeter
 
 Using [Tweepy](https://github.com/tweepy/tweepy).
+
+#### Features:
+- custom "Twitter for..." message
+- make tweets, replies and comment retweets with and without images
+- save and access all your accounts easily
+- simple and effective commands
 
 ## Installation
 
@@ -52,3 +59,4 @@ After you enter a command you will be asked for further inputs.
 - Multi-Line Tweets not possible.
 - Image upload doesn't support `.jpg` files and probably many other file types. `.png` is working fine.
 - `sre` and `isre` will replace `re` and `ire`
+- needs `undo` command to delete last tweet
