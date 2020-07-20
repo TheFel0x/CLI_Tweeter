@@ -76,11 +76,11 @@ def tweeter(api):
 tw      --Tweet.
 [>] enter your Tweet.
 
-re      --Reply. (don't use this.)
+re      --Reply.
 [ID:] ID of the Tweet that you want to reply to.
 [>] enter your reply.
 
-sre      --More stable reply. (use this instead.)
+sre      --More stable reply. (not needed anymore)
 [ID:] ID of the Tweet that you want to reply to.
 [ats:] all mentioned @'s
 [>] enter your reply.
@@ -94,13 +94,13 @@ itw     --Image-Tweet
 [path:] path of your image. The images will be in the order in which you add them.
 [>] enter your Tweet.
 
-ire     --Image-Reply (don't use this.)
+ire     --Image-Reply
 [ID:] ID of the Tweet that you want to reply to.
 [count:] how many images you want to attach. (1-4)
 [path:] path of your image. The images will be in the order in which you add them.
 [>] enter your reply.
 
-isre     --Image-Stable-Reply (use this instead.)
+isre     --Image-Stable-Reply (not needed anymore)
 [ID:] ID of the Tweet that you want to reply to.
 [ats:] all mentioned @'s
 [count:] how many images you want to attach. (1-4)
@@ -124,7 +124,7 @@ h       --Help.""")
         elif cmd == "re":   #reply
             tw_id = input("ID:")
             tweet = input(">")
-            api.update_status(tweet, in_reply_to_status_id = tw_id)
+            api.update_status(tweet, in_reply_to_status_id = tw_id,  auto_populate_reply_metadata = True)
 
         elif cmd == "sre":   #reply
             tw_id = input("ID:")
@@ -174,13 +174,13 @@ h       --Help.""")
             tweet = input(">")
         
             if count >= 4:
-                api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
+                api.update_status(tweet, media_ids=[img_obj1.media_id_string, img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id, auto_populate_reply_metadata = True)
             if count == 3:
-                api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
+                api.update_status(tweet, media_ids=[img_obj2.media_id_string, img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id, auto_populate_reply_metadata = True)
             if count == 2:
-                api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id)
+                api.update_status(tweet, media_ids=[img_obj3.media_id_string, img_obj4.media_id_string], in_reply_to_status_id = tw_id, auto_populate_reply_metadata = True)
             if count == 1:
-                api.update_status(tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = tw_id)
+                api.update_status(tweet, media_ids=[img_obj4.media_id_string], in_reply_to_status_id = tw_id, auto_populate_reply_metadata = True)
             
         elif cmd == "isre":  #image+stable reply
             tw_id = input("ID:")
