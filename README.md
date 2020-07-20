@@ -58,5 +58,5 @@ After you enter a command you will be asked for further inputs.
 - Doesn't check if the post has <150 characters.
 - Multi-Line Tweets not possible.
 - Image upload doesn't support `.jpg` files and probably many other file types. `.png` is working fine.
-- `sre` and `isre` will replace `re` and `ire`
+- ~~`sre` and `isre` will replace `re` and `ire`~~ _(done)_
 - needs `undo` command to delete last tweet
